@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Installs HAProxy version 2.4
+# Installs HAProxy version 1.8
 
 apt-get install -y software-properties-common
-add-apt-repository -y ppa:vbernat/haproxy-2.4
+add-apt-repository -y ppa:vbernat/haproxy-1.8
 apt-get update
-apt-get install -y haproxy=2.4.\*
+apt-get install -y haproxy=1.8.\*
 
 echo "ENABLED=1" >> /etc/default/haproxy
 mv /etc/haproxy/haproxy.cfg{,.original}
@@ -35,8 +35,8 @@ listen hbnb
     balance roundrobin
     option httpclose
     option forwardfor
-    server 383306-web-01 54.210.195.109 check
-    server 383306-web-02 100.25.146.132 check
+    server 383306-web-01 54.210.195.109:80 check
+    server 383306-web-02 100.25.146.132:80 check
 " >> /etc/haproxy/haproxy.cfg
 
 service haproxy start
